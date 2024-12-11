@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_lavakush07_easybuggy_vulnerable_application_1733935558240-push-trigger-input-set
+  identifier: Build_lavakush07_easybuggy_vulnerable_application_1733935558240pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_lavakush07_easybuggy_vulnerable_application_1733935558240
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
