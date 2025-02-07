@@ -8,7 +8,7 @@ on:
 
 jobs:
   sbom-ingestion-job:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     env:
       HARNESS_ACCOUNT_URL: 'https://myaccount.harness.io'
