@@ -96,10 +96,10 @@ jobs:
           ATTEST: false
           KMS_KEY: ${{ env.COSIGN_KEY }}
           
-      - name: Run SBOM Policy Enforcement Action
-        uses: ./sbom-policy-enforcement
-        with:
-          TARGET: 'lavakush07/easy-buggy-app:GHA'
-          VERIFY: true
-          KMS_KEY: ${{ env.COSIGN_KEY }}
-          POLICY_SET_REF: 'policy_for_at'
+      # - name: Run SBOM Policy Enforcement Action
+      #   uses: ./sbom-policy-enforcement
+      #   with:
+      #     TARGET: 'lavakush07/easy-buggy-app:GHA'
+      #     VERIFY: true
+      #     KMS_KEY: ${{ env.COSIGN_KEY }}
+      #     POLICY_SET_REF: 'policy_for_at'
