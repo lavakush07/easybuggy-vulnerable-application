@@ -90,7 +90,7 @@ jobs:
 
       # Step 12: Run SBOM Orchestration Action
       - name: Run SBOM Orchestration Action
-        uses: harness/github-actions/sbom-generation@0.36.0
+        uses: harness/github-actions/sbom-generation@1.1.0
         with:
           TOOL: 'Syft'
           FORMAT: 'spdx-json'
@@ -100,7 +100,7 @@ jobs:
 
       # Step 13: Run SBOM Policy Enforcement Action
       - name: Run SBOM Policy Enforcement Action
-        uses: harness/github-actions/sbom-policy-enforcement@0.36.0
+        uses: harness/github-actions/sbom-policy-enforcement@1.1.0
         with:
           TARGET: 'lavakush07/easy-buggy-app:GHA1'
           VERIFY: true
