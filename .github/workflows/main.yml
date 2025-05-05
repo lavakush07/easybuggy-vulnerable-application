@@ -1,9 +1,9 @@
 name: Combined Workflow for SLSA Provenance, SBOM, and Policy Enforcement
 
 on:
-  workflow_dispatch:
-  release:
-    types: [created]
+  push:
+    branches:
+      - main
 
 jobs:
   combined-workflow:
