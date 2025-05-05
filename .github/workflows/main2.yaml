@@ -59,4 +59,4 @@ jobs:
           FORMAT: 'spdx-json'
           TARGET: 'lavakush07/easy-buggy-app:GHA1'
           ATTEST: true
-          KMS_KEY: 'cosign
+          KMS_KEY: 'cosign'
