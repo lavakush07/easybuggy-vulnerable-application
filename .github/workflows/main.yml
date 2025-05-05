@@ -1,8 +1,9 @@
-name: Combined Workflow for SLSA Provenance, SBOM, and Policy Enforcement.
+name: Combined Workflow for SLSA Provenance, SBOM, and Policy Enforcement
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   combined-workflow:
@@ -20,10 +21,11 @@ jobs:
         uses: actions/checkout@v3
 
       # Step 2: Clone Additional Repository
-      - name: Clone Additional Repository
-        run: |
-          git clone https://github.com/lavakush07/easybuggy-vulnerable-application
-          echo "Cloned additional repository: docker-nginx"
+      # - name: Clone Additional Repository
+      #   run: |
+      #     git clone https://github.com/easybuggy-vulnerable-application
+      #     echo "Cloned additional repository: docker-nginx"
+      
       # Step 3: Log in to Docker Hub
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
@@ -31,22 +33,23 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      # Step 4: Set Registry Environment Variables
       - name: Set Vault Environment Variables
         run: |
           echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" >> $GITHUB_ENV
           echo "DOCKER_PASSWORD=${{ secrets.DOCKER_PASSWORD }}" >> $GITHUB_ENV
-      # Step 4: Build and Tag Docker Image
+      # Step 5: Build and Tag Docker Image
       - name: Build and Tag Docker Image
         run: |
-          cd easybuggy-vulnerable-application
-          docker build -t lavakush07/easy-buggy-app:GHA .
-          echo "Docker image built and tagged as lavakush07/easy-buggy-app:GHA"
-      # Step 5: Push the Docker Image to Docker Hub
+          
+          docker build -t lavakush07/easy-buggy-app:GHA1 .
+          echo "Docker image built and tagged as lavakush07/easy-buggy-app:GHA1."
+      # Step 6: Push the Docker Image to Docker Hub
       - name: Push Docker Image
         run: |
-          docker push lavakush07/easy-buggy-app:GHA
-          echo "Docker image pushed to Docker Hub"
-      # Step 6: Log in to Vault
+          docker push lavakush07/easy-buggy-app:GHA1
+          echo "Docker image pushed to Docker Hub."
+      # Step 7: Log in to Vault
       - name: Log in to Vault
         uses: hashicorp/vault-action@v2
         id: vault_login
@@ -54,18 +57,9 @@ jobs:
           url: ${{ secrets.VAULT_URL }}
           method: token
           token: ${{ secrets.VAULT_TOKEN }}
+          outputToken: true
 
-      # Step 7: Set Vault Environment Variables
-      - name: Set Vault Environment Variables
-        run: |
-          echo "VAULT_ADDR=${{ secrets.VAULT_URL }}" >> $GITHUB_ENV
-          echo "VAULT_TOKEN=${{ steps.vault_login.outputs.token }}" >> $GITHUB_ENV
-      # Step 8: Retrieve KMS key (Cosign) from Vault
-      # Step to retrieve the public key (Cosign)
-      - name: Retrieve Cosign Public Key from Vault
-        run: |
-          export COSIGN_KEY=$(vault kv get -field=public_key -mount="secret1/cosign-key" "cosign-key")
-          echo "COSIGN_KEY=$COSIGN_KEY" >> $GITHUB_ENV
+      # Step 8: Verify Vault Login and Print Token
       - name: Verify Vault Login and Print Token
         run: |
           echo "Vault login successful."
@@ -78,28 +72,37 @@ jobs:
         run: |
           echo "VAULT_ADDR=${{ secrets.VAULT_URL }}" >> $GITHUB_ENV
           echo "VAULT_TOKEN=${{ secrets.VAULT_TOKEN }}" >> $GITHUB_ENV
-      # Step 9: Run SLSA Provenance Action
-      # - name: Run SLSA Provenance Action
-      #   uses: ./slsa-generation
-      #   with:
-      #     TARGET: 'lavakush07/easy-buggy-app:GHAA'
-      #     ATTEST: false
-      #     KMS_KEY: ${{ env.COSIGN_KEY }}
+      # Step 10: Run SLSA Provenance Action
+      - name: Run SLSA Provenance Action
+        uses: ./slsa-generation
+        with:
+          TARGET: 'lavkush07/easy-buggy-app:GHA1'
+          ATTEST: true
+          KMS_KEY: 'cosign'
 
-      # Step 10: Run SBOM Orchestration Action
+      # Step 11: Run SLSA Provenance Action
+      # -  name: SLSA Verification
+      #    uses: ./slsa-verification
+      #    with:
+      #      TARGET: 'kartikey366/nginx-private:github-actions'
+      #      VERIFY: true
+      #      KMS_KEY: 'cosign'
+
+      # Step 12: Run SBOM Orchestration Action
       - name: Run SBOM Orchestration Action
-        uses: ./sbom-generation
+        uses: harness/github-actions/sbom-generation@0.36.0
         with:
           TOOL: 'Syft'
           FORMAT: 'spdx-json'
-          TARGET: 'lavakush07/easy-buggy-app:GHA'
-          ATTEST: false
-          KMS_KEY: ${{ env.COSIGN_KEY }}
-          
-      # - name: Run SBOM Policy Enforcement Action
-      #   uses: ./sbom-policy-enforcement
-      #   with:
-      #     TARGET: 'lavakush07/easy-buggy-app:GHA'
-      #     VERIFY: true
-      #     KMS_KEY: ${{ env.COSIGN_KEY }}
-      #     POLICY_SET_REF: 'policy_for_at'
+          TARGET: 'lavakush07/easy-buggy-app:GHA1'
+          ATTEST: true
+          KMS_KEY: 'cosign'
+
+      # Step 13: Run SBOM Policy Enforcement Action
+      - name: Run SBOM Policy Enforcement Action
+        uses: harness/github-actions/sbom-policy-enforcement@0.36.0
+        with:
+          TARGET: 'lavakush07/easy-buggy-app:GHA1'
+          VERIFY: true
+          KMS_KEY: 'cosign'
+          POLICY_SET_REF: 'opa_policy_set_for_at'
