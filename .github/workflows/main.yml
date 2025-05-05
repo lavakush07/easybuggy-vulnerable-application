@@ -8,7 +8,7 @@ on:
 
 jobs:
   sbom-generation-job:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     env:
       HARNESS_ACCOUNT_URL: 'https://app.harness.io'
