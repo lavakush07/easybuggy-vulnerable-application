@@ -21,10 +21,10 @@ jobs:
         uses: actions/checkout@v3
 
       # Step 2: Clone Additional Repository
-      - name: Clone Additional Repository
-        run: |
-          git clone https://github.com/easybuggy-vulnerable-application
-          echo "Cloned additional repository: docker-nginx"
+      # - name: Clone Additional Repository
+      #   run: |
+      #     git clone https://github.com/easybuggy-vulnerable-application
+      #     echo "Cloned additional repository: docker-nginx"
       
       # Step 3: Log in to Docker Hub
       - name: Log in to Docker Hub
