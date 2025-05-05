@@ -41,7 +41,7 @@ jobs:
       # Step 5: Build and Tag Docker Image
       - name: Build and Tag Docker Image
         run: |
-          cd docker-nginx
+          cd easybuggy-vulnerable-application
           docker build -t lavakush07/easy-buggy-app:GHA1 .
           echo "Docker image built and tagged as lavakush07/easy-buggy-app:GHA1."
       # Step 6: Push the Docker Image to Docker Hub
