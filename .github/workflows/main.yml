@@ -74,7 +74,7 @@ jobs:
           echo "VAULT_TOKEN=${{ secrets.VAULT_TOKEN }}" >> $GITHUB_ENV
       # Step 10: Run SLSA Provenance Action
       - name: Run SLSA Provenance Action
-        uses: ./slsa-generation
+        uses: harness/github-actions/slsa-generation@1.1.0
         with:
           TARGET: 'lavkush07/easy-buggy-app:GHA1'
           ATTEST: true
