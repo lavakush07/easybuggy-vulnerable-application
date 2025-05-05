@@ -39,7 +39,7 @@ jobs:
           echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" >> $GITHUB_ENV
           echo "DOCKER_PASSWORD=${{ secrets.DOCKER_PASSWORD }}" >> $GITHUB_ENV
       # Step 5: Build and Tag Docker Image
-      - name: Build and Tag Docker Image
+      - name: Build and Tag Docker Images
         run: |
           
           docker build -t lavakush07/easy-buggy-app:GHA1 .
