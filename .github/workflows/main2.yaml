@@ -31,7 +31,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       # Step 3: Build and Tag Docker Image
-      - name: Build and Tag Docker Image
+      - name: Build and Tag Docker Images
         run: |
           
           docker build -t lavakush07/easy-buggy-app:GHA1 .
@@ -53,10 +53,11 @@ jobs:
 
       # Step 6: Run SBOM Generation and Attestation
       - name: Run SBOM Generation Action
-        uses: ./sbom-orchestration
+        uses: harness/github-actions/sbom-generation@1.1.0
         with:
           TOOL: 'Syft'
           FORMAT: 'spdx-json'
-          TARGET: 'lavakush07/easy-buggy-app:GHA1'
-          ATTEST: true
-          KMS_KEY: 'cosign'
+          TARGET: 'lavaksuh07/easy-buggy-app:GHA1'
+          ATTEST: false
+          KMS_KEY: 'path/to/my/key/in/vault'
+
