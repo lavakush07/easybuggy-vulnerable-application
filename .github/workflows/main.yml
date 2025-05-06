@@ -105,7 +105,7 @@ jobs:
       #     POLICY_SET_REF: 'policy_for_at'
     
       -  name: SLSA Verification
-         uses: ./slsa-verification
+         uses: harness/github-actions/slsa-verification@1.1.0
          with:
            HARNESS_ACCOUNT_URL: https://app.harness.io
            HARNESS_ACCOUNT_ID: vpCkHKsDSxK9_KYfjCTMKA
