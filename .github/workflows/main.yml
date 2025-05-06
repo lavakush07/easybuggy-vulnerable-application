@@ -8,12 +8,12 @@ on:
 jobs:
   combined-workflow:
     runs-on: ubuntu-latest
-    # env:
-    #   HARNESS_ACCOUNT_URL: 'https://app.harness.io'
-    #   HARNESS_ACCOUNT_ID: 'vpCkHKsDSxK9_KYfjCTMKA'
-    #   HARNESS_ORG_ID: 'SSCA'
-    #   HARNESS_PROJECT_ID: 'Exploratory'
-    #   HARNESS_API_KEY: ${{ secrets.SCS_API_KEY }}
+    env:
+      HARNESS_ACCOUNT_URL: 'https://app.harness.io'
+      HARNESS_ACCOUNT_ID: 'vpCkHKsDSxK9_KYfjCTMKA'
+      HARNESS_ORG_ID: 'SSCA'
+      HARNESS_PROJECT_ID: 'Exploratory'
+      HARNESS_API_KEY: ${{ secrets.SCS_API_KEY }}
 
     steps:
       # Step 1: Checkout the main repository
@@ -73,12 +73,12 @@ jobs:
           echo "VAULT_ADDR=${{ secrets.VAULT_URL }}" >> $GITHUB_ENV
           echo "VAULT_TOKEN=${{ secrets.VAULT_TOKEN }}" >> $GITHUB_ENV
       # Step 10: Run SLSA Provenance Action
-      # - name: Run SLSA Provenance Action
-      #   uses: harness/github-actions/slsa-generation@1.1.0
-      #   with:
-      #     TARGET: 'lavakush07/easy-buggy-app:GHA1'
-      #     ATTEST: false
-      #     KMS_KEY: 'cosign'
+      - name: Run SLSA Provenance Action
+        uses: harness/github-actions/slsa-generation@1.1.0
+        with:
+          TARGET: 'lavakush07/easy-buggy-app:GHA1'
+          ATTEST: true
+          KMS_KEY: 'cosign'
 
       # Step 11: Run SLSA Provenance Action
       # -  name: SLSA Verification
