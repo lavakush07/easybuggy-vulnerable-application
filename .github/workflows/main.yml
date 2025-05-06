@@ -109,7 +109,7 @@ jobs:
           TARGET: 'lavakush07/easy-buggy-app:GHA1'
           TOOL: 'Syft'
           FORMAT: 'spdx-json'
-          ATTEST: false
+          ATTEST: true
           KMS_KEY: 'cosign'
 
 
