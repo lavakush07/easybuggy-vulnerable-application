@@ -99,7 +99,7 @@ jobs:
       #     KMS_KEY: 'cosign'
 
       - name: SBOM Generation
-        uses: harness/github-actions/sbom-generation@1.1.0
+        uses: harness/github-actions/sbom-generation@3747
         with:
           HARNESS_ACCOUNT_URL: 'https://app.harness.io'
           HARNESS_ACCOUNT_ID: 'vpCkHKsDSxK9_KYfjCTMKA'
