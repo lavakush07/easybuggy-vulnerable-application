@@ -35,7 +35,7 @@ inputs:
 
 runs:
   using: 'docker'
-  image: 'harness/ssca-plugin'
+  image: 'harness/ssca-plugin:3747'
   entrypoint: '/bin/ssca-plugin'
   args: 
    - github-orchestrate
