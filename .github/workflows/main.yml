@@ -76,7 +76,7 @@ jobs:
       - name: Run SLSA Provenance Action
         uses: harness/github-actions/slsa-generation@1.1.0
         with:
-          TARGET: 'lavkush07/easy-buggy-app:GHA1'
+          TARGET: 'lavakush07/easy-buggy-app:GHA1'
           ATTEST: true
           KMS_KEY: 'cosign'
 
