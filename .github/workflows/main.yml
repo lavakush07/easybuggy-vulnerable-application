@@ -12,7 +12,7 @@ jobs:
       HARNESS_ACCOUNT_ID: 'vpCkHKsDSxK9_KYfjCTMKA'
       HARNESS_ORG_ID: 'SSCA'
       HARNESS_PROJECT_ID: 'Exploratory'
-      HARNESS_API_KEY: ${{ secrets.SSCA_API_KEY }}
+      HARNESS_API_KEY: ${{ secrets.SCS_API_KEY }}
 
     steps:
       # Step 1: Checkout the main repository
@@ -111,7 +111,7 @@ jobs:
            HARNESS_ACCOUNT_ID: vpCkHKsDSxK9_KYfjCTMKA
            HARNESS_ORG_ID: SSCA
            HARNESS_PROJECT_ID: Exploratory
-           HARNESS_API_KEY: ${{ secrets.SSCA_API_KEY }}
+           HARNESS_API_KEY: ${{ secrets.SCS_API_KEY }}
            TARGET: lavakush07/easy-buggy-app:GHAA
            VERIFY: true
            KMS_KEY: 'cosign'
