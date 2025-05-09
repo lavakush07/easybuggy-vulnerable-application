@@ -87,6 +87,7 @@ jobs:
       #     KMS_KEY: 'cosign'
 
       # Step 10: Run SBOM Orchestration Action
+
       - name: Run SBOM Orchestration Action
         uses: ./sbom-generation
         with:
