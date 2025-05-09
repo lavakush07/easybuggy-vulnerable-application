@@ -58,6 +58,6 @@ jobs:
           TOOL: 'Syft'
           FORMAT: 'spdx-json'
           TARGET: 'lavaksuh07/easy-buggy-app:GHA1'
-          ATTEST: false
-          KMS_KEY: 'path/to/my/key/in/vault'
+          ATTEST: true
+          KMS_KEY: 'cosign'
 
