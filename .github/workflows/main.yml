@@ -56,22 +56,7 @@ jobs:
           token: ${{ secrets.VAULT_TOKEN }}
 
       # Step 7: Set Vault Environment Variables
-      - name: Set Vault Environment Variables
-        run: |
-          echo "VAULT_ADDR=${{ secrets.VAULT_URL }}" >> $GITHUB_ENV
-          echo "VAULT_TOKEN=${{ steps.vault_login.outputs.token }}" >> $GITHUB_ENV
-      # Step 8: Retrieve KMS key (Cosign) from Vault
-      # Step to retrieve the public key (Cosign)
-      - name: Retrieve Cosign Public Key from Vault
-        run: |
-          export COSIGN_KEY=$(vault kv get -field=public_key -mount="secret1/cosign-key" "cosign-key")
-          echo "COSIGN_KEY=$COSIGN_KEY" >> $GITHUB_ENV
-      - name: Verify Vault Login and Print Token
-        run: |
-          echo "Vault login successfull."
-          echo "Vault Token: ${{ steps.vault_login.outputs.token }}"
-        env:
-          VAULT_TOKEN: ${{ steps.vault_login.outputs.token }}  # Ensuring token is accessible
+      # Ensuring token is accessible
 
       # Step 9: Set Vault Environment Variables
       - name: Set Vault Environment Variables
