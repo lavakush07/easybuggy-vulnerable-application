@@ -93,7 +93,7 @@ jobs:
           TOOL: 'Syft'
           FORMAT: 'spdx-json'
           TARGET: 'lavakush07/easy-buggy-app:GHA'
-          ATTEST: false
+          ATTEST: true
           KMS_KEY: 'cosign'
           
       # - name: Run SBOM Policy Enforcement Action
