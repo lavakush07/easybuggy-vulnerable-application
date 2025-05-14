@@ -7,12 +7,7 @@ on:
 jobs:
   combined-workflow:
     runs-on: ubuntu-latest
-    env:
-      HARNESS_ACCOUNT_URL: 'https://app.harness.io'
-      HARNESS_ACCOUNT_ID: 'vpCkHKsDSxK9_KYfjCTMKA'
-      HARNESS_ORG_ID: 'SSCA'
-      HARNESS_PROJECT_ID: 'Exploratory'
-      HARNESS_API_KEY: ${{ secrets.SCS_API_KEY }}
+    
 
     steps:
       # Step 1: Checkout the main repository
@@ -77,6 +72,11 @@ jobs:
       - name: Run SBOM Orchestration Action
         uses: harness/github-actions/sbom-generation@1.1.0
         with:
+          HARNESS_ACCOUNT_URL: 'https://app.harness.io'
+          HARNESS_ACCOUNT_ID: 'vpCkHKsDSxK9_KYfjCTMKA'
+          HARNESS_ORG_ID: 'SSCA'
+          HARNESS_PROJECT_ID: 'Exploratory'
+          HARNESS_API_KEY: ${{ secrets.SCS_API_KEY }}
           TOOL: 'Syft'
           FORMAT: 'spdx-json'
           TARGET: 'lavakush07/easy-buggy-app:GHA'
