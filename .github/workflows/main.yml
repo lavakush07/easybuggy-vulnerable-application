@@ -78,14 +78,15 @@ jobs:
           
     # Step 11: Run SBOM Verification Action
     
-      -  name: SLSA Verification
-         uses: harness/github-actions/slsa-verification@1.1.0
+      -  name: SBOM Verification
+         uses: harness/github-actions/sbom-policy-enforcement@1.1.0
          with:
            HARNESS_ACCOUNT_URL: https://app.harness.io
            HARNESS_ACCOUNT_ID: vpCkHKsDSxK9_KYfjCTMKA
            HARNESS_ORG_ID: SSCA
            HARNESS_PROJECT_ID: Exploratory
            HARNESS_API_KEY: ${{ secrets.SCS_API_KEY }}
-           TARGET: lavakush07/easy-buggy-app:GHAA
+           TARGET: lavakush07/easy-buggy-app:GHA
            VERIFY: true
+           POLICY_SET_REF: 'sbom_policy_enforcement'
            KMS_KEY: 'cosign'
