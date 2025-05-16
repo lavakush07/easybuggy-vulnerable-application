@@ -88,5 +88,5 @@ jobs:
            HARNESS_API_KEY: ${{ secrets.SCS_API_KEY }}
            TARGET: lavakush07/easy-buggy-app:GHA
            VERIFY: true
-           POLICY_SET_REF: 'sbom_policy_enforcement'
+           POLICY_SET_REF: 'policy_for_at'
            KMS_KEY: 'cosign'
