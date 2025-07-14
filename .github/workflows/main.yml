@@ -11,7 +11,7 @@ jobs:
 
     steps:
       # Step 1: Checkout the main repository
-      - name: Checkout Main Repository
+      - name: Checkout Main Repository.
         uses: actions/checkout@v3
 
       # Step 2: Clone Additional Repository
