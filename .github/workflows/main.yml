@@ -62,8 +62,8 @@ jobs:
 
       # Step 10: Run SLSA Generation Action
 
-      - name: SLSA Provenance Generation
-        uses: harness/github-actions/slsa-generation@1.1.0
+      - name: SBOM Generation
+        uses: harness/github-actions/sbom-generation@1.1.0
         with:
           HARNESS_ACCOUNT_URL: https://app.harness.io
           HARNESS_ACCOUNT_ID: vpCkHKsDSxK9_KYfjCTMKA
@@ -78,8 +78,8 @@ jobs:
           
     # Step 11: Run SLSA Verification Action
     
-      -  name: SLSA Verification
-         uses: harness/github-actions/slsa-verification@1.1.0
+      -  name: SBOM Verification
+         uses: harness/github-actions/sbom-policy-enforcement@1.1.0
          with:
            HARNESS_ACCOUNT_URL: https://app.harness.io
            HARNESS_ACCOUNT_ID: vpCkHKsDSxK9_KYfjCTMKA
