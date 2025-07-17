@@ -71,6 +71,8 @@ jobs:
           HARNESS_PROJECT_ID: Exploratory
           HARNESS_API_KEY: ${{ secrets.SCS_API_KEY }}
           TARGET: lavakush07/easy-buggy-app:GHA
+          TOOL: Syft
+          FORMAT: spdx-json
           ATTEST: true
           KMS_KEY: 'cosign'
     
