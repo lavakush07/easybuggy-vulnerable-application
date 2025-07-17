@@ -70,7 +70,7 @@ jobs:
           HARNESS_ORG_ID: SSCA
           HARNESS_PROJECT_ID: Exploratory
           HARNESS_API_KEY: ${{ secrets.SCS_API_KEY }}
-          TARGET: lavakush07/easy-buggy-app:GHA
+          TARGET: lavakush07/easy-buggy-app:demo1
           TOOL: Syft
           FORMAT: spdx-json
           ATTEST: true
@@ -88,7 +88,32 @@ jobs:
            HARNESS_ORG_ID: SSCA
            HARNESS_PROJECT_ID: Exploratory
            HARNESS_API_KEY: ${{ secrets.SCS_API_KEY }}
-           TARGET: lavakush07/easy-buggy-app:GHA
+           TARGET: lavakush07/easy-buggy-app:demo1
            VERIFY: true
            POLICY_SET_REF: 'policy_for_at'
            KMS_KEY: 'cosign'
+
+      -  name: SLSA Provenance Generation
+         uses: harness/github-actions/slsa-generation@1.1.0
+         with:
+           HARNESS_ACCOUNT_URL: https://app.harness.io
+           HARNESS_ACCOUNT_ID: vpCkHKsDSxK9_KYfjCTMKA
+           HARNESS_ORG_ID: SSCA
+           HARNESS_PROJECT_ID: Exploratory
+           HARNESS_API_KEY: ${{ secrets.SCS_API_KEY }}
+           TARGET: lavakush07/easy-buggy-app:demo1
+           ATTEST: true
+           KMS_KEY: 'cosign'  
+
+
+      - name: SLSA Verification
+        uses: harness/github-actions/slsa-verification@1.1.0
+        with:
+          HARNESS_ACCOUNT_URL: https://app.harness.io
+          HARNESS_ACCOUNT_ID: vpCkHKsDSxK9_KYfjCTMKA
+          HARNESS_ORG_ID: SSCA
+          HARNESS_PROJECT_ID: Exploratory
+          HARNESS_API_KEY: ${{ secrets.SCS_API_KEY }}
+          TARGET: lavakush07/easy-buggy-app:demo1
+          VERIFY: true
+          KMS_KEY: 'cosign'     
