@@ -70,7 +70,7 @@ jobs:
           HARNESS_ORG_ID: SSCA
           HARNESS_PROJECT_ID: Exploratory
           HARNESS_API_KEY: ${{ secrets.SCS_API_KEY }}
-          TARGET: lavakush07/easy-buggy-app:v77
+          TARGET: lavakush07/easy-buggy-app:GHA
           TOOL: Syft
           FORMAT: spdx-json
           ATTEST: true
@@ -88,7 +88,7 @@ jobs:
            HARNESS_ORG_ID: SSCA
            HARNESS_PROJECT_ID: Exploratory
            HARNESS_API_KEY: ${{ secrets.SCS_API_KEY }}
-           TARGET: lavakush07/easy-buggy-app:v77
+           TARGET: lavakush07/easy-buggy-app:GHA
            VERIFY: true
            POLICY_SET_REF: 'policy_for_at'
            KMS_KEY: 'cosign'
@@ -101,7 +101,7 @@ jobs:
            HARNESS_ORG_ID: SSCA
            HARNESS_PROJECT_ID: Exploratory
            HARNESS_API_KEY: ${{ secrets.SCS_API_KEY }}
-           TARGET: lavakush07/easy-buggy-app:demo1
+           TARGET: lavakush07/easy-buggy-app:GHA
            ATTEST: true
            KMS_KEY: 'cosign'  
 
@@ -114,6 +114,6 @@ jobs:
           HARNESS_ORG_ID: SSCA
           HARNESS_PROJECT_ID: Exploratory
           HARNESS_API_KEY: ${{ secrets.SCS_API_KEY }}
-          TARGET: lavakush07/easy-buggy-app:demo1
+          TARGET: lavakush07/easy-buggy-app:GHA
           VERIFY: true
           KMS_KEY: 'cosign'     
