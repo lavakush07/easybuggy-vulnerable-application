@@ -1,4 +1,4 @@
-name: Workflow for SLSA Generation and Verification
+name: Workflow for SBOM Generation and Verification, SLSA Generation and Verification
 
 on:
   push:
@@ -34,12 +34,12 @@ jobs:
       - name: Build and Tag Docker Image
         run: |
           cd easybuggy-vulnerable-application
-          docker build -t lavakush07/easy-buggy-app:GHAA .
-          echo "Docker image built and tagged as lavakush07/easy-buggy-app:GHAA"
+          docker build -t lavakush07/easy-buggy-app:demo .
+          echo "Docker image built and tagged as lavakush07/easy-buggy-app:demo"
       # # Step 5: Push the Docker Image to Docker Hub
       - name: Push Docker Image
         run: |
-          docker push lavakush07/easy-buggy-app:GHAA
+          docker push lavakush07/easy-buggy-app:demo
           echo "Docker image pushed to Docker Hub"
       # Step 6: Log in to Vault
       - name: Log in to Vault
@@ -60,7 +60,7 @@ jobs:
           echo "VAULT_TOKEN=${{ secrets.VAULT_TOKEN }}" >> $GITHUB_ENV
 
 
-      # Step 10: Run SLSA Generation Action
+      # Step 10: Run SBOM Generation Action
 
       - name: SBOM Generation
         uses: harness/github-actions/sbom-generation@1.1.0
@@ -70,7 +70,7 @@ jobs:
           HARNESS_ORG_ID: SSCA
           HARNESS_PROJECT_ID: Exploratory
           HARNESS_API_KEY: ${{ secrets.SCS_API_KEY }}
-          TARGET: lavakush07/easy-buggy-app:GHA
+          TARGET: lavakush07/easy-buggy-app:demo
           TOOL: Syft
           FORMAT: spdx-json
           ATTEST: true
@@ -78,7 +78,7 @@ jobs:
     
 
           
-    # Step 11: Run SLSA Verification Action
+    # Step 11: Run SBOM Verification Action
     
       -  name: SBOM Verification
          uses: harness/github-actions/sbom-policy-enforcement@1.1.0
@@ -88,10 +88,12 @@ jobs:
            HARNESS_ORG_ID: SSCA
            HARNESS_PROJECT_ID: Exploratory
            HARNESS_API_KEY: ${{ secrets.SCS_API_KEY }}
-           TARGET: lavakush07/easy-buggy-app:GHA
+           TARGET: lavakush07/easy-buggy-app:demo
            VERIFY: true
            POLICY_SET_REF: 'policy_for_at'
            KMS_KEY: 'cosign'
+
+     # Step 11: Run SLSA Generation Action
 
       -  name: SLSA Provenance Generation
          uses: harness/github-actions/slsa-generation@1.1.0
@@ -101,10 +103,11 @@ jobs:
            HARNESS_ORG_ID: SSCA
            HARNESS_PROJECT_ID: Exploratory
            HARNESS_API_KEY: ${{ secrets.SCS_API_KEY }}
-           TARGET: lavakush07/easy-buggy-app:GHA
+           TARGET: lavakush07/easy-buggy-app:demo
            ATTEST: true
            KMS_KEY: 'cosign'  
-
+  
+      # Step 12: Run SLSA Verification Action
 
       - name: SLSA Verification
         uses: harness/github-actions/slsa-verification@1.1.0
@@ -114,6 +117,6 @@ jobs:
           HARNESS_ORG_ID: SSCA
           HARNESS_PROJECT_ID: Exploratory
           HARNESS_API_KEY: ${{ secrets.SCS_API_KEY }}
-          TARGET: lavakush07/easy-buggy-app:GHA
+          TARGET: lavakush07/easy-buggy-app:demo
           VERIFY: true
           KMS_KEY: 'cosign'     
