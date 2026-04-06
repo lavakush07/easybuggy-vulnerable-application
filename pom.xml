@@ -9,6 +9,7 @@
 	<packaging>war</packaging>
 
 	<properties>
+		<!-- build: triggers SBOM pipeline on main -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<easybuggy-port>8080</easybuggy-port>
 		<!-- default properties (JDK 1.7 or earlier) -->
