@@ -10,9 +10,16 @@ jobs:
     
 
     steps:
-      # Step 1: Checkout the main repository
+      # Step 1: Checkout the main repository (full history for secret scanning)
       - name: Checkout Main Repository.
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Gitleaks Secret Scan
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Step 2: Clone Additional Repository
       - name: Clone Additional Repository1.
